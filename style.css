@@ -1,0 +1,17 @@
+html,body { 
+	height:100%;
+	padding:0px; 
+}
+
+body {
+	background-color: #EEEEEE;
+}
+
+#content {
+	background-color: white;
+	display: block;
+	width: 50%;
+	margin: 0 auto;
+	text-align: center;
+	height: 100%;
+}
