@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Lacroix Counter</title>
-
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
     <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
     <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
@@ -14,20 +14,28 @@
     <div id="content"></div>
     <script type="text/babel">
       var CounterBox = React.createClass({
+        getInitialState: function() {
+          return {countDay: 0, countWeek:0, countMonth: 0, countYear: 0, countAll: 0}
+        },
+        // TODO: get Counts from server
+        getCounts: function() {
+          this.setState({countDay: dayCount, countWeek: weekCount, countMonth: monthCount, countYear:yearCount, countAll: allCount});
+        },
+        componentDidMount: function() {
+          setInterval(this.getCounts, 500);
+        },
         increaseCounts: function() {
           dayCount ++;
           weekCount ++;
           monthCount ++;
           yearCount ++;
           allCount ++;
-          // Put counts in here
-          // set state
-          // pass count values into counts as props
+          this.getCounts();
         },
         render: function() {
           return (
             <div className="counterBox">
-              <Counts />
+              <Counts countDay={this.state.countDay} countWeek={this.state.countWeek} countMonth={this.state.countMonth} countYear={this.state.countYear} countAll={this.state.countAll}/>
               <CountButton increaseCounts={this.increaseCounts}/>
             </div>
           );
@@ -41,31 +49,15 @@
       var allCount = 0;
 
       var Counts = React.createClass({
-        getInitialState: function() {
-          return {countDay: 0, countWeek:0, countMonth: 0, countYear: 0, countAll: 0}
-        },
-        getCounts: function() {
-          this.setState({countDay: dayCount, countWeek: weekCount, countMonth: monthCount, countYear:yearCount, countAll: allCount});
-        },
-        componentDidMount: function() {
-          setInterval(this.getCounts, 500);
-        },
+
         render: function() {
           return (
             <div className="counts">
-              Sprout has enjoyed <br /> {this.state.countDay} drinks today, <br /> {this.state.countWeek} this week, <br /> {this.state.countMonth} this month, <br /> {this.state.countYear} this year, <br /> and {this.state.countAll} since August 16th, 2016.
+              Sprout has enjoyed <br /> {this.props.countDay} drinks today, <br /> {this.props.countWeek} this week, <br /> {this.props.countMonth} this month, <br /> {this.props.countYear} this year, <br /> and {this.props.countAll} since August 16th, 2016.
             </div>
           );
         }
       });
-
-      // var increaseCounts = function () {
-      //   dayCount ++;
-      //   weekCount ++;
-      //   monthCount ++;
-      //   yearCount ++;
-      //   allCount ++;
-      // }
 
       var CountButton = React.createClass({
         increment: function() {
