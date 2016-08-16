@@ -12,6 +12,50 @@
   </head>
   <body>
     <div id="content"></div>
-    <script type="text/babel" src="count.js"></script>
+    <script type="text/babel">
+      var CounterBox = React.createClass({
+        render: function() {
+          return (
+            <div className="counterBox">
+              <CountButton />
+            </div>
+          );
+        }
+      });
+
+      var dayCount = 0;
+      var monthCount = 0;
+      var yearCount = 0;
+      var allCount = 0;
+
+      var Counts = React.createClass({
+        getInitialState: function() {
+          return {countDay: 0, countMonth: 0, countYear: 0, countAll: 0}
+        },
+        componentDidMount: function() {
+          setInterval(this.setState({countDay: dayCount, countMonth: monthCount, countYear:yearCount, countAll: allCount}));
+        },
+        render: function() {
+          return (
+            <div className="counts">
+              
+            </div>
+          );
+        }
+      });
+
+      var CountButton = React.createClass({
+        render: function() {
+          return (
+            <button className="countButton">I enjoyed a Lacroix</button>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <CounterBox />,
+        document.getElementById('content')
+      );
+    </script>
   </body>
 </html>
