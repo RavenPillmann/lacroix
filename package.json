@@ -1,0 +1,19 @@
+{
+  "name": "lacroix",
+  "version": "1.0.0",
+  "description": "Lacroix Counter",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RavenPillmann/lacroix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RavenPillmann/lacroix/issues"
+  },
+  "homepage": "https://github.com/RavenPillmann/lacroix#readme"
+}
