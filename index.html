@@ -19,18 +19,26 @@
         },
         // TODO: get Counts from server
         getCounts: function() {
-          this.setState({countDay: dayCount, countWeek: weekCount, countMonth: monthCount, countYear:yearCount, countAll: allCount});
+          // var zcounts = 0;
+          $.get({
+            url: '/count'
+          }).done (function (data) {
+            var zcounts = data;
+            this.setState({countDay: zcounts.dayCount, countWeek: zcounts.weekCount, countMonth: zcounts.monthCount, countYear: zcounts.yearCount, countAll: zcounts.allCount});
+          })
+          
         },
         componentDidMount: function() {
           setInterval(this.getCounts, 500);
         },
         increaseCounts: function() {
-          dayCount ++;
-          weekCount ++;
-          monthCount ++;
-          yearCount ++;
-          allCount ++;
+          $.post({
+            url: '/count'
+          }).done (function (data) {
+            console.log(data);
+          })
           this.getCounts();
+
         },
         render: function() {
           return (
@@ -53,7 +61,7 @@
         render: function() {
           return (
             <div className="counts">
-              Sprout has enjoyed <br /> {this.props.countDay} drinks today, <br /> {this.props.countWeek} this week, <br /> {this.props.countMonth} this month, <br /> {this.props.countYear} this year, <br /> and {this.props.countAll} since August 16th, 2016.
+              Sprout has enjoyed <br /> {this.props.countDay} drinks today, <br /> {this.props.countWeek} drinks this week, <br /> {this.props.countMonth} drinks this month, <br /> {this.props.countYear} drinks this year, <br /> and {this.props.countAll} drinks since August 16th, 2016.
             </div>
           );
         }
